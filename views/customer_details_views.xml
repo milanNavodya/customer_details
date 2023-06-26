@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Customer Details list view -->
+    <record id="customer_details_tree_view" model="ir.ui.view">
+        <field name="name">customer.details.tree.view</field>
+        <field name="model">customer.details</field>
+        <field name="arch" type="xml">
+            <tree string="Customer Details">
+                <field name="name"/>
+                <field name="gender"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Customer Details Form view -->
+    <record id="customer_details_form_view" model="ir.ui.view">
+        <field name="name">customer.details.form.view</field>
+        <field name="model">customer.details</field>
+        <field name="arch" type="xml">
+            <form string="Customer Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="gender"/>
+                            <field name="rep"/>
+                        </group>
+                        <group>
+                            <field name="dob"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Services" name="service_line">
+                            <field name="service_line">
+                                <tree string="Services" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="customer_details_action" model="ir.actions.act_window">
+        <field name="name">Customer Details</field>
+        <field name="res_model">customer.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="customer_details_menu"
+              parent="sale.sale_order_menu"
+              action="customer_details_action"
+              sequence="10"/>
+
+    <!-- Inherit a view -->
+    <!-- Sale order Form view -->
+    <record id="view_order_form_inherit_customer_details" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.customer.details</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sale_header']/group[1]/field[@name='partner_id']" position="after">
+                <field name="sale_type"/>
+            </xpath>
+            <xpath expr="//group[@name='sale_header']/group[1]/field[@name='partner_id']" position="attributes">
+                <attribute name="string">Client</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

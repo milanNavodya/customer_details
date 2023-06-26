@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+customer_details_access_base_user,customer_details_access_base,model_customer_details,base.group_user,1,1,1,1
+customer_services_access_base_user,customer_services_access_base,model_customer_services,base.group_user,1,1,1,1
